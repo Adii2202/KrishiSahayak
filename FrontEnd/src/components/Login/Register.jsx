@@ -4,6 +4,8 @@ import {BiUser} from 'react-icons/bi'
 import {AiOutlineUnlock} from 'react-icons/ai'
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
+import { CgMail } from "react-icons/cg";
+
 
 
 function Register()
@@ -16,9 +18,15 @@ function Register()
                 <form action="">
 
                     <div className="relative my-9">
-                        <input type="email" className="block w-72 py-2.3 px-0 text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer" placeholder=""/>
-                        <label htmlFor="email" className="absolute left-0 text-sm text-white duration-300 transform -translate-y-9  scale-100 top-5 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500  peer-placeholder-shown:scale-100  peer-placeholder-shown:top-0  peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 ">Your Username</label>
+                        <input type="username" className="block w-72 py-2.3 px-0 text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer" placeholder=""/>
+                        <label htmlFor="username" className="absolute left-0 text-sm text-white duration-300 transform -translate-y-9  scale-100 top-5 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500  peer-placeholder-shown:scale-100  peer-placeholder-shown:top-0  peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 ">Your Username</label>
                         <BiUser   className="absolute top-0 right-4 bottom-8" />
+                    </div>
+
+                    <div className="relative my-9">
+                        <input type="email" className="block w-72 py-2.3 px-0 text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer" placeholder=""/>
+                        <label htmlFor="email" className="absolute left-0 text-sm text-white duration-300 transform -translate-y-9  scale-100 top-5 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500  peer-placeholder-shown:scale-100  peer-placeholder-shown:top-0  peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 ">Email</label>
+                        <CgMail   className="absolute top-0 right-4 bottom-8" />
                     </div>
 
                     <div className="relative my-8">
@@ -59,7 +67,7 @@ function Register()
                         <Link to="" className="text-blue-500" >Forgot Password?</Link>
                     </div>
 
-                    <button  className="w-full mb-4 text-[18px] mt-6 rounded-full bg-white text-emerald-800 hover:bg-emerald-600 hover:text-white py-2 transition-colors duration-300" type="submit">Login</button>
+                    <button  className="w-full mb-4 text-[18px] mt-6 rounded-full bg-white text-emerald-800 hover:bg-emerald-600 hover:text-white py-2 transition-colors duration-300" type="submit">Register</button>
 
                     <div>
                         <span className="m-4" >Already Created ? <Link className="text-blue-500" to='/Login'>Login</Link> </span>
