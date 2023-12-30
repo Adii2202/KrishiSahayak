@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineUnlock } from "react-icons/ai";
@@ -14,14 +14,12 @@ function Register() {
         const { latitude, longitude } = position.coords;
 
         // Display alert and send location data to the server
-        const allowLocation = window.confirm(
-          `Allow Access to your Location!!`
-        );
+        const allowLocation = window.confirm(`Allow Access to your Location!!`);
 
         if (allowLocation) {
           try {
             const response = await axios.post(
-              "http://localhost:5000/api/location",
+              "http://localhost:5000/location",
               {
                 latitude,
                 longitude,
