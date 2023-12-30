@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
 import Register from "./components/Login/Register";
+import App1 from "./components/Dashboard/App1";
+import Dashboard from "./components/Dashboard/pages/Dashboard";
 
 function App() {
   useEffect(() => {
@@ -47,6 +49,7 @@ function App() {
       <Routes>
         <Route path="Login" element={<Login />} />
         <Route path="" element={<Register />} />
+        <Route path="/Dashboard" element={<Dashboard/>} />
       </Routes>
     </div>
   );
