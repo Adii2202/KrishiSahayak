@@ -5,8 +5,8 @@ export const location = catchAsyncError(async (req, res, next) => {
     const { latitude, longitude } = req.body;
 
     // Use OpenCage API to get location details
-    const apiKey = process.env.OPENCAGE_API_KEY;
-    // const opencage = require("opencage-api-client");
+    const apiKey = "af5ab23220644e0dad25a034916a05de";
+    const opencage = require("opencage-api-client");
     const data = await opencage.geocode({
       q: `${latitude}, ${longitude}`,
       key: apiKey,
