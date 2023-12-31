@@ -1,4 +1,6 @@
-import { catchAsyncError } from "../middlewares/catchAsyncErrors";
+import { catchAsyncError } from "../middlewares/catchAsyncErrors.js";
+import opencage from "opencage-api-client";
+import { Location } from "../models/Location.js";
 
 export const location = catchAsyncError(async (req, res, next) => {
   try {
@@ -6,7 +8,6 @@ export const location = catchAsyncError(async (req, res, next) => {
 
     // Use OpenCage API to get location details
     const apiKey = "af5ab23220644e0dad25a034916a05de";
-    const opencage = require("opencage-api-client");
     const data = await opencage.geocode({
       q: `${latitude}, ${longitude}`,
       key: apiKey,

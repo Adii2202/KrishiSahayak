@@ -19,7 +19,7 @@ function Register() {
         if (allowLocation) {
           try {
             const response = await axios.post(
-              "http://localhost:5000/location",
+              "http://localhost:5000/api/location",
               {
                 latitude,
                 longitude,
