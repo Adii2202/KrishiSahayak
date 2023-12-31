@@ -50,15 +50,15 @@ function Register() {
         <form action="">
           <div className="relative my-9">
             <input
-              type="username"
+              type="name"
               className="block w-72 py-2.3 px-0 text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
               placeholder=""
             />
             <label
-              htmlFor="username"
+              htmlFor="name"
               className="absolute left-0 text-sm text-white duration-300 transform -translate-y-9  scale-100 top-5 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500  peer-placeholder-shown:scale-100  peer-placeholder-shown:top-0  peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 "
             >
-              Your Username
+              Your Name
             </label>
             <BiUser className="absolute top-0 right-4 bottom-8" />
           </div>
