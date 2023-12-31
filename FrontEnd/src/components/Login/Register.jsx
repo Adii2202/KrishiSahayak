@@ -8,8 +8,7 @@ import { CgMail } from "react-icons/cg";
 import axios from "axios";
 
 function Register() {
-  useEffect((e) => {
-    e.preventDefault();
+  useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
