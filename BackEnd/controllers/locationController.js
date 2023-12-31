@@ -5,9 +5,9 @@ import { Location } from "../models/Location.js";
 export const location = catchAsyncError(async (req, res, next) => {
   try {
     const { latitude, longitude } = req.body;
-
+    // print(process.env.OPEN_CAGE_API_KEY);
     // Use OpenCage API to get location details
-    const apiKey = "af5ab23220644e0dad25a034916a05de";
+    const apiKey = process.env.OPEN_CAGE_API_KEY;
     const data = await opencage.geocode({
       q: `${latitude}, ${longitude}`,
       key: apiKey,
