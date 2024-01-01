@@ -25,8 +25,8 @@ export const location = catchAsyncError(async (req, res, next) => {
       };
 
       // Save location data to MongoDB
-      const newLocation = new Location(locationData);
-      await newLocation.save();
+      // const newLocation = new Location(locationData);
+      // await newLocation.save();
 
       res.json(locationData);
     } else {
