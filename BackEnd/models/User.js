@@ -41,25 +41,27 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Please enter your password"],
-    minLength: [6, "Password must be at least 6 characters"],
     select: false,
   },
-  location: {
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    pincode: { type: String, required: true },
-    address: { type: String, required: true },
-  },
+  location: [
+    {
+      latitude: { type: Number, required: true },
+      longitude: { type: Number, required: true },
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      pincode: { type: String, required: true },
+      address: { type: String, required: true },
+    },
+  ],
+  SoilComposition: [
+    {
+      nLevel: { type: Number },
+      pLevel: { type: Number },
+      kLevel: { type: Number },
+      phLevel: { type: Number },
+    },
+  ],
   todolist: [toDoListSchema],
-
-  SoilComposition: {
-    nLevel: { type: Number },
-    pLevel: { type: Number },
-    kLevel: { type: Number },
-    phLevel: { type: Number },
-  },
 });
 
 export const User = mongoose.model("User", userSchema);

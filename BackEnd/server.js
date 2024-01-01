@@ -1,9 +1,7 @@
 import opencage from "opencage-api-client";
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import { connectDB } from "./config/database.js";
-import { Location } from "./models/Location.js";
 import locationRoute from "./routes/allRoutes.js";
 
 connectDB();

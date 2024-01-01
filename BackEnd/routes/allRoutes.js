@@ -1,8 +1,9 @@
 import express from "express";
-import { location } from "../controllers/locationController.js";
+import { location, register } from "../controllers/locationController.js";
 
 const router = express.Router();
 
 router.route("/api/location").post(location);
+router.route("/api/register").post(register);
 
 export default router;

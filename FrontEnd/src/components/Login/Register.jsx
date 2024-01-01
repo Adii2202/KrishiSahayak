@@ -16,6 +16,8 @@ function Register() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [pincode, setPincode] = useState("");
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -27,6 +29,8 @@ function Register() {
 
         if (allowLocation) {
           try {
+            setLatitude(latitude);
+            setLongitude(longitude);
             setLocationUpdate(false);
             const response = await axios.post(
               "http://localhost:5000/api/location",
@@ -54,8 +58,27 @@ function Register() {
     }
   }, []);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/register", {
+        name,
+        email,
+        latitude,
+        longitude,
+        statename,
+        cityname,
+        pincode,
+        address,
+        password,
+      });
+      // console.log(latitude, longitude);
+      console.log("User registered:", response.data);
+      // Optionally, redirect the user to a success page or handle accordingly
+    } catch (error) {
+      console.error("Error registering user:", error.response.data);
+    }
   };
 
   return (
