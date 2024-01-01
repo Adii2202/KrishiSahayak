@@ -62,12 +62,13 @@ function Dashboard() {
             </div>
 
             <div className=" pt-12 ">
+              <DashboardCard13  />
+            </div>
+            
+            <div className=" pt-12 ">
               <DashboardCard11 />
             </div>
 
-            <div className=" pt-12 ">
-              <DashboardCard13  />
-            </div>
 
           </div>
         </main>
