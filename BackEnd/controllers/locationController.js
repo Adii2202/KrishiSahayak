@@ -2,6 +2,8 @@ import { catchAsyncError } from "../middlewares/catchAsyncErrors.js";
 import opencage from "opencage-api-client";
 import { User } from "../models/User.js";
 import ErrorHandler from "../middlewares/errorHandler.js";
+import { sendToken } from "../middlewares/sendToken.js";
+import bcrypt from "bcryptjs";
 
 export const location = catchAsyncError(async (req, res, next) => {
   try {
@@ -52,7 +54,7 @@ export const register = catchAsyncError(async (req, res, next) => {
       address,
       password,
     } = req.body;
-    console.log(latitude, longitude);
+
     if (!name || !email || !password)
       return next(new ErrorHandler("Please enter all fields", 400));
 
@@ -60,10 +62,13 @@ export const register = catchAsyncError(async (req, res, next) => {
 
     if (user) return next(new ErrorHandler("User Already exists", 409));
 
+    // Hash the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = new User({
       name,
       email,
-      password,
+      password: hashedPassword,
       location: [
         {
           latitude,
@@ -78,9 +83,34 @@ export const register = catchAsyncError(async (req, res, next) => {
 
     await newUser.save();
 
-    res.json({ message: "User registered successfully" });
+    // Send token upon successful registration
+    sendToken(res, newUser, "User registered successfully", 201);
+    // res.redirect("/login");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
+});
+
+export const login = catchAsyncError(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password)
+    return next(new ErrorHandler("Please enter all fields", 400));
+
+  const user = await User.findOne({ email }).select("+password");
+  console.log(user);
+  if (!user) return next(new ErrorHandler("Incorrect Email or Password", 401));
+
+  console.log("Entered Password:", password);
+  console.log("Stored Hashed Password:", user.password);
+  // const isMatch = await comparepassword(user.password, password);
+  const isMatch = await bcrypt.compare(password, user.password);
+  console.log("Password Match:", isMatch);
+  // console.log(password);
+
+  if (!isMatch)
+    return next(new ErrorHandler("Incorrect Email or Password", 401));
+
+  sendToken(res, user, `Welcome back ${user.name}`, 200);
 });

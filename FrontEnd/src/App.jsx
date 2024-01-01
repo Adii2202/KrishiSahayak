@@ -13,9 +13,9 @@ function App() {
       style={{ backgroundImage: `url(${image})` }}
     >
       <Routes>
-        <Route path="Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="" element={<Register />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );

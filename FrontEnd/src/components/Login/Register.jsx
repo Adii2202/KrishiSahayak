@@ -6,6 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [locationUpdate, setLocationUpdate] = useState(null);
@@ -58,6 +59,7 @@ function Register() {
     }
   }, []);
 
+  const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -75,6 +77,7 @@ function Register() {
       });
       // console.log(latitude, longitude);
       console.log("User registered:", response.data);
+      navigate("/login");
       // Optionally, redirect the user to a success page or handle accordingly
     } catch (error) {
       console.error("Error registering user:", error.response.data);
