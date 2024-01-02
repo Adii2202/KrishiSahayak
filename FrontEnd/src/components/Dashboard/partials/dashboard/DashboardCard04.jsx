@@ -8,8 +8,8 @@ import React, { useState, useEffect } from 'react';
 
 function DashboardCard04() {
   const [data, setData] = useState({
-    text: '',
-    imageUrl: '',
+    text: 'apple',
+    imageUrl: './img/apple.jpg',
   });
 
   useEffect(() => {
@@ -18,30 +18,31 @@ function DashboardCard04() {
         // Simulating an API call (replace with actual data fetching logic)
         const response = await fetch('your-api-endpoint');
         const result = await response.json(); // Assuming your API returns JSON
-
+        //FrontEnd\src\components\images\blackgram.jpg
         // Define a mapping between text responses and image URLs
         const imageMapping = {
-          rice: 'rice.avif',
-          maize: 'maize.png',
-          chickpea: 'chickpea.jpeg',
-          kidneybeans: 'kidneybeans.jpg',
-          pidgeonpeas: 'pidgeonpeas.jpg',
-          mothbeans: 'mothbeans.jpg',
-          blackgram: 'blackgram.jpg',
-          lentil: 'lentil.jpg',
-          pomegranate: 'pomegranate.jpg',
-          banana: 'banana.jpg',
-          mango: 'mango.jpg',
-          grapes: 'grapes.jpg',
-          watermelon: 'watermelon.webp',
-          muskmelon: 'muskmelon.avif',
-          apple: 'apple.jpg',
-          orange: 'daff',
-          papaya: 'fsfa',
-          coconut: 'faf',
-          cotton: 'dadad',
-          jute: 'dadfa',
-          coffee: 'dad',
+          rice: './img/rice.avif',
+          maize: './img/maize.png',
+          chickpea: './img/chickpea.jpeg',
+          kidneybeans: './img/kidneybeans.jpg',
+          pidgeonpeas: './img/pidgeonpeas.jpg',
+          mothbeans: './img/mothbeans.jpg',
+          mungbeans: './img/fadf',
+          blackgram: './img/blackgram.jpg',
+          lentil: './img/l.jpg',
+          pomegranate: './img/pomegranate.jpg',
+          banana: './img/banana.jpg',
+          mango: './img//mango.jpg',
+          grapes: './img/grapes.jpg',
+          watermelon: './img/watermelon.webp',
+          muskmelon: './img/muskmelon.avif',
+          apple: './img/apple.jpg',
+          orange: './img/daff',
+          papaya: './img/fsfa',
+          coconut: './img/faf',
+          cotton: './img/dadad',
+          jute: './img/dadfa',
+          coffee: './img/dad',
 
           // ... add mappings for all 22 responses
         };
@@ -52,7 +53,7 @@ function DashboardCard04() {
         // Set the data with the text and corresponding image URL
         setData({
           text: text,
-          imageUrl: imageMapping[text] || 'default-image-url.jpg', // Use a default image if no mapping is found
+          imageUrl: imageMapping[text] || './img/apple.jpg', // Use a default image if no mapping is found
         });
       } catch (error) {
         console.error('Error fetching data:', error);
