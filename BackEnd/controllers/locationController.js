@@ -3,7 +3,7 @@ import opencage from "opencage-api-client";
 import { User } from "../models/User.js";
 import ErrorHandler from "../middlewares/errorHandler.js";
 import { sendToken } from "../middlewares/sendToken.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 export const location = catchAsyncError(async (req, res, next) => {
   try {
@@ -63,12 +63,12 @@ export const register = catchAsyncError(async (req, res, next) => {
     if (user) return next(new ErrorHandler("User Already exists", 409));
 
     // Hash the password before saving it to the database
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({
+    user = await User.create({
       name,
       email,
-      password: hashedPassword,
+      password,
       location: [
         {
           latitude,
@@ -81,10 +81,10 @@ export const register = catchAsyncError(async (req, res, next) => {
       ],
     });
 
-    await newUser.save();
+    // await newUser.save();
 
     // Send token upon successful registration
-    sendToken(res, newUser, "User registered successfully", 201);
+    sendToken(res, user, "User registered successfully", 201);
     // res.redirect("/login");
   } catch (error) {
     console.error(error);
@@ -95,22 +95,22 @@ export const register = catchAsyncError(async (req, res, next) => {
 export const login = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
 
+  // const file = req.file;
+
   if (!email || !password)
     return next(new ErrorHandler("Please enter all fields", 400));
 
   const user = await User.findOne({ email }).select("+password");
-  console.log(user);
+
   if (!user) return next(new ErrorHandler("Incorrect Email or Password", 401));
 
-  console.log("Entered Password:", password);
-  console.log("Stored Hashed Password:", user.password);
-  // const isMatch = await comparepassword(user.password, password);
-  const isMatch = await bcrypt.compare(password, user.password);
-  console.log("Password Match:", isMatch);
-  // console.log(password);
+  // upload file on cloudinary
+
+  const isMatch = await user.comparePassword(password);
 
   if (!isMatch)
     return next(new ErrorHandler("Incorrect Email or Password", 401));
 
+  // send token function here as bohot saare tokens banane hai
   sendToken(res, user, `Welcome back ${user.name}`, 200);
 });
