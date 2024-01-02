@@ -15,9 +15,12 @@
     "chart.js": "^3.8.0",
     "chartjs-adapter-moment": "^1.0.0",
     "date-fns": "^3.0.6",
+<<<<<<< HEAD
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "mappls-web-maps": "^3.0.4",
+=======
+>>>>>>> 82795b2b3d355531bd34f63b81ff9f809ac33fa4
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-big-calendar": "^1.8.5",
@@ -27,8 +30,11 @@
     "react-dom": "^18.2.0",
     "react-flatpickr": "^3.10.13",
     "react-icons": "^4.12.0",
+<<<<<<< HEAD
     "react-leaflet": "^4.2.1",
     "react-map-gl": "^7.1.7",
+=======
+>>>>>>> 82795b2b3d355531bd34f63b81ff9f809ac33fa4
     "react-router-dom": "^6.21.1",
     "react-time-picker": "^6.6.0",
     "react-transition-group": "^4.4.2"
