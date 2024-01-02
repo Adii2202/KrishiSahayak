@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Register from "./components/Login/Register";
 import Dashboard from "./components/Dashboard/pages/Dashboard";
+import MapComponent from "./components/Mandimap/Map";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     >
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/map" element={<MapComponent />} />
         <Route path="" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
