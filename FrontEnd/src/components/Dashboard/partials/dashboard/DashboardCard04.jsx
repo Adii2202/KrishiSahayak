@@ -1,50 +1,76 @@
-import React from 'react';
-import BarChart from '../../charts/BarChart01';
+import React, { useState, useEffect } from 'react';
 
-// Import utilities
-import { tailwindConfig } from '../../utils/Utils';
+// array(['rice', 'maize', 'chickpea', 'kidneybeans', 'pigeonpeas',
+//        'mothbeans', 'mungbean', 'blackgram', 'lentil', 'pomegranate',
+//        'banana', 'mango', 'grapes', 'watermelon', 'muskmelon', 'apple',
+//        'orange', 'papaya', 'coconut', 'cotton', 'jute', 'coffee'],
+//       dtype=object)
 
 function DashboardCard04() {
+  const [data, setData] = useState({
+    text: '',
+    imageUrl: '',
+  });
 
-  const chartData = {
-    labels: [
-      '12-01-2020', '01-01-2021', '02-01-2021',
-      '03-01-2021', '04-01-2021', '05-01-2021',
-    ],
-    datasets: [
-      // Light blue bars
-      {
-        label: 'Direct',
-        data: [
-          800, 1600, 900, 1300, 1950, 1700,
-        ],
-        backgroundColor: tailwindConfig().theme.colors.blue[400],
-        hoverBackgroundColor: tailwindConfig().theme.colors.blue[500],
-        barPercentage: 0.66,
-        categoryPercentage: 0.66,
-      },
-      // Blue bars
-      {
-        label: 'Indirect',
-        data: [
-          4900, 2600, 5350, 4800, 5200, 4800,
-        ],
-        backgroundColor: tailwindConfig().theme.colors.indigo[500],
-        hoverBackgroundColor: tailwindConfig().theme.colors.indigo[600],
-        barPercentage: 0.66,
-        categoryPercentage: 0.66,
-      },
-    ],
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Simulating an API call (replace with actual data fetching logic)
+        const response = await fetch('your-api-endpoint');
+        const result = await response.json(); // Assuming your API returns JSON
+
+        // Define a mapping between text responses and image URLs
+        const imageMapping = {
+          rice: 'rice.avif',
+          maize: 'maize.png',
+          chickpea: 'chickpea.jpeg',
+          kidneybeans: 'kidneybeans.jpg',
+          pidgeonpeas: 'pidgeonpeas.jpg',
+          mothbeans: 'mothbeans.jpg',
+          blackgram: 'blackgram.jpg',
+          lentil: 'lentil.jpg',
+          pomegranate: 'pomegranate.jpg',
+          banana: 'banana.jpg',
+          mango: 'mango.jpg',
+          grapes: 'grapes.jpg',
+          watermelon: 'watermelon.webp',
+          muskmelon: 'muskmelon.avif',
+          apple: 'apple.jpg',
+          orange: 'daff',
+          papaya: 'fsfa',
+          coconut: 'faf',
+          cotton: 'dadad',
+          jute: 'dadfa',
+          coffee: 'dad',
+
+          // ... add mappings for all 22 responses
+        };
+
+        // Assuming the API response has a 'text' property
+        const text = result.text;
+
+        // Set the data with the text and corresponding image URL
+        setData({
+          text: text,
+          imageUrl: imageMapping[text] || 'default-image-url.jpg', // Use a default image if no mapping is found
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200">
       <header className="px-5 py-4 border-b border-slate-100">
-        <h2 className="font-semibold text-slate-800">Direct VS Indirect</h2>
+        <h2 className="font-semibold text-slate-800">Data</h2>
       </header>
-      {/* Chart built with Chart.js 3 */}
-      {/* Change the height attribute to adjust the chart height */}
-      <BarChart data={chartData} width={595} height={248} />
+      <div className="p-4">
+        <p style={{ color: 'black' }}>{data.text}</p>
+        <img src={data.imageUrl} alt="Response Image" style={{ maxWidth: '100%', maxHeight: '300px', marginTop: '10px' }} />
+      </div>
     </div>
   );
 }
