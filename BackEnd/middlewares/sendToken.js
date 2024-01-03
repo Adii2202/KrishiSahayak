@@ -11,7 +11,7 @@ export const sendToken = (res, user, message, statusCode = 200) => {
       path: "/", // Specify the path where the cookie is accessible
     };
 
-    res.status(statusCode).cookie("token", token, options).json({
+    res.status(statusCode).cookie("cookie", token, options).json({
       success: true,
       message,
       user,

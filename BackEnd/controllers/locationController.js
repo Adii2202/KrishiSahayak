@@ -114,25 +114,22 @@ export const login = catchAsyncError(async (req, res, next) => {
   sendToken(res, user, `Welcome back ${user.name}`, 200);
 });
 
-// export const getUserLocation = catchAsyncError(async (req, res, next) => {
-//   try {
-//     const userId = await req.user._id;
-//     console.log(userId);
-//     // Fetch the user data from the database
-//     const user = await User.findById(userId);
+export const getUserLocation = catchAsyncError(async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    console.log(user);
+    if (!user) {
+      return next(new ErrorHandler("User not found", 404));
+    }
 
-//     if (!user) {
-//       return next(new ErrorHandler("User not found", 404));
-//     }
+    const userLocation = {
+      latitude: user.location[0].latitude,
+      longitude: user.location[0].longitude,
+    };
 
-//     const userLocation = {
-//       latitude: user.location[0].latitude,
-//       longitude: user.location[0].longitude,
-//     };
-
-//     res.status(200).json({ location: userLocation });
-//   } catch (error) {
-//     console.error("Error fetching user location:", error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
+    res.status(200).json({ location: userLocation });
+  } catch (error) {
+    console.error("Error fetching user location:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
