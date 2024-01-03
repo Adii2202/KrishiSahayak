@@ -17,6 +17,7 @@ function Login() {
         email,
         password,
       });
+      
       console.log("Login Succesfull:", response.data);
       navigate("/dashboard");
     } catch (error) {

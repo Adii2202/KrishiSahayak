@@ -3,7 +3,6 @@ import opencage from "opencage-api-client";
 import { User } from "../models/User.js";
 import ErrorHandler from "../middlewares/errorHandler.js";
 import { sendToken } from "../middlewares/sendToken.js";
-import bcrypt from "bcrypt";
 
 export const location = catchAsyncError(async (req, res, next) => {
   try {
