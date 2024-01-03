@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import axios from "axios";
 
 const containerStyle = {
   width: "600px",
@@ -12,6 +13,24 @@ const center = {
 };
 
 function MyComponent() {
+  const [userLocation, setUserLocation] = useState(null);
+
+  useEffect(() => {
+    const getUserLocation = async () => {
+      try {
+        const response = await axios.get("/api/getuserlocation");
+        const { latitude, longitude } = response.data;
+        console.log(latitude + " " + longitude);
+        // Set the user's location in the state
+        setUserLocation({ lat: latitude, lng: longitude });
+      } catch (error) {
+        console.error("Error fetching user location:", error);
+      }
+    };
+
+    getUserLocation();
+  }, []);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBNFWDyiI6zOqNHToYldLr_YEjlfNehCHM",
@@ -48,11 +67,14 @@ function MyComponent() {
   }, []);
 
   const calculateAndDisplayRoute = () => {
-    if (directionsService && directionsRenderer) {
+    if (directionsService && directionsRenderer && userLocation) {
       directionsService.route(
         {
-          origin: new window.google.maps.LatLng(19.14, 75.14),
-          destination: new window.google.maps.LatLng(19.75, 75.14),
+          origin: new window.google.maps.LatLng(
+            userLocation.lat,
+            userLocation.lng
+          ),
+          destination: new window.google.maps.LatLng(19.75, 75.14), // Change to your desired destination
           travelMode: window.google.maps.TravelMode.DRIVING,
         },
         (result, status) => {
@@ -82,15 +104,18 @@ function MyComponent() {
 
   const fetchLocationName = (location, setName) => {
     const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({ location: location }, (results, status) => {
-      if (status === window.google.maps.GeocoderStatus.OK) {
-        if (results[0]) {
-          setName(results[0].formatted_address);
+    geocoder.geocode(
+      { location: { lat: location.lat(), lng: location.lng() } },
+      (results, status) => {
+        if (status === window.google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            setName(results[0].formatted_address);
+          }
+        } else {
+          console.error(`Error fetching location details: ${status}`);
         }
-      } else {
-        console.error(`Error fetching location details: ${status}`);
       }
-    });
+    );
   };
 
   useEffect(() => {
