@@ -15,11 +15,11 @@ function App2() {
   }
 
   return (
-    <div className='w-full h-full text-white px-8'>
-      <nav className='w-full p-3 flex justify-between items-center'>
-        <h1 className='font-bold tracking-wide text-3xl'>Weather Forecast</h1>
-        <div className='bg-white w-[15rem] overflow-hidden shadow-2xl rounded flex items-center p-2 gap-2'>
-          <img src={search} alt="search" className='w-[1.5rem] h-[1.5rem]' />
+    <div className='w-full h-full text-white  px-10 border-none '>
+      <nav className='w-full p-3 flex justify-between items-center border-none '>
+        <h1 className='font-bold tracking-wide text-3xl border-none'>Weather Forecast</h1>
+        <div className='bg-white w-[15rem] overflow-hidden shadow-2xl rounded flex items-center p-2 gap-2 border-none'>
+          <img src={search} alt="search" className='w-[1.5rem] h-[1.5rem] border-none' />
           <input onKeyUp={(e) => {
             if (e.key === 'Enter') {
               // sumit the form
@@ -29,7 +29,7 @@ function App2() {
         </div>
       </nav>
       <BackgroundLayout></BackgroundLayout>
-      <main className='w-full flex flex-wrap gap-8 py-4 px-[10%] items-center justify-center'>
+      <main className='w-full flex flex-wrap gap-8 py-4 px-[10%] items-center justify-center border-none'>
         <WeatherCard
           place={thisLocation}
           windspeed={weather.wspd}

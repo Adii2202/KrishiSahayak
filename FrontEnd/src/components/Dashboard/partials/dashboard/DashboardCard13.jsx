@@ -8,7 +8,7 @@ import { StateContextProvider } from './Context/index.jsx'
 
 function DashboardCard13() {
   return (
-    <div className="col-span-full xl:col-span-6 bg-black shadow-lg border border-slate-200 h-full rounded-lg">
+    <div className="col-span-full xl:col-span-6  shadow-lg  h-full rounded-lg border-none ">
       <StateContextProvider>
         <App2 />
       </StateContextProvider>,

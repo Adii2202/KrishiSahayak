@@ -9,8 +9,8 @@ import ML from './ML_Prediction/ML';
 function DashboardCard04() {
 
   return (
-    <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200">
-      <ML/>
+    <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200 ">
+      <ML/> 
     </div>
   );
 }

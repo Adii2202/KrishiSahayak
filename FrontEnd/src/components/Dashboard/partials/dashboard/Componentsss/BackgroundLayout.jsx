@@ -34,7 +34,7 @@ const BackgroundLayout = () => {
   }, [weather])
 
   return (
-    <img src={image} alt="weather_image" className='h-screen w-full fixed left-0 top-0 -z-[10]' />
+    <img src={image} alt="weather_image" className='h-fit w-full fixed left-0 top-0 -z-[10] pt-12 object-fill ' />
   )
 }
 

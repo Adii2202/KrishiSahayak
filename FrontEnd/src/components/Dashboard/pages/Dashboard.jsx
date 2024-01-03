@@ -32,7 +32,7 @@ function Dashboard() {
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-12 gap-6">
+            <div className="grid grid-cols-12 gap-6  animate-fade-right animate-once animate-duration-[3000ms] animate-ease-linear ">
               {/* Bar chart (Direct vs Indirect) */}
               <DashboardCard04 />
               {/* Line chart (Real Time Value) */}
@@ -40,11 +40,13 @@ function Dashboard() {
             
             </div>
 
-            <div className=" pt-12 ">
+
+
+            <div className=" pt-12 animate-fade-down animate-once animate-duration-[3000ms] animate-delay-[400ms] animate-ease-linear border-none ">
               <DashboardCard13  />
             </div>
             
-            <div className=" pt-12 ">
+            <div className=" pt-12  animate-fade-down animate-once animate-duration-[3000ms] animate-delay-[1500ms] animate-ease-linear">
               <DashboardCard11 />
             </div>
 
