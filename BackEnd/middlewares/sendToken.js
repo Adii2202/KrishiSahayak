@@ -1,14 +1,17 @@
 export const sendToken = (res, user, message, statusCode = 200) => {
   try {
     const token = user.getJWTToken();
-    console.log("\n" + token);
+    console.log("\nGenerated Token: " + token);
+
     const options = {
-      expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+      maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days in milliseconds
       httpOnly: true,
       sameSite: "none",
+      secure: true,
+      path: "/", // Specify the path where the cookie is accessible
     };
 
-    res.status(statusCode).cookie("token", token, options).json({
+    res.status(statusCode).cookie("cookie", token, options).json({
       success: true,
       message,
       user,
