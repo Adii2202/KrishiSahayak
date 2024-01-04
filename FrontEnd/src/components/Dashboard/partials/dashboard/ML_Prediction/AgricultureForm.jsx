@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+
+const axiosInstance = axios.create({
+  withCredentials: true,
+});
+
+// Now use axiosInstance for your requests
 
 const mean = {
   N: 50.414286,
@@ -15,7 +21,7 @@ const variance = {
   N: 1323.634624,
   P: 1123.951739,
   K: 2686.586835,
-  temperature: 25.833810,
+  temperature: 25.83381,
   humidity: 492.505029,
   ph: 0.606162,
   rainfall: 2927.305546,
@@ -32,6 +38,22 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
     rainfall: 0,
   });
 
+  const formRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (formRef.current && !formRef.current.contains(e.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: parseFloat(e.target.value) });
   };
@@ -39,7 +61,8 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
   const standardizeValues = (rawValues) => {
     const standardizedValues = {};
     for (const key in rawValues) {
-      standardizedValues[key] = (rawValues[key] - mean[key]) / Math.sqrt(variance[key]);
+      standardizedValues[key] =
+        (rawValues[key] - mean[key]) / Math.sqrt(variance[key]);
     }
     return standardizedValues;
   };
@@ -54,21 +77,36 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
       }
     }
 
-    const standardizedData = standardizeValues(formData);
-
-    
-
+    // Save the parameters to the User database
     try {
-      const response = await axios.post('http://127.0.0.1:8000/predict', standardizedData);
+      const response = await axiosInstance.post(
+        "http://localhost:5000/api/soildetails", // Replace with your server endpoint
+        formData
+      );
+
       console.log(response);
-      onPredictionUpdate(response.data.prediction, `/img/${response.data.prediction}.jpg`);
+
+      // Continue with the prediction logic
+      const standardizedData = standardizeValues(formData);
+
+      const predictionResponse = await axios.post(
+        "http://127.0.0.1:8000/predict",
+        standardizedData
+      );
+
+      onPredictionUpdate(
+        predictionResponse.data.prediction,
+        `/img/${predictionResponse.data.prediction}.jpg`
+      );
+
       onClose();
     } catch (error) {
-      console.error('Error predicting crop:', error);
+      console.error("Error saving parameters:", error);
     }
   };
+
   return (
-    <div>
+    <div ref={formRef}>
       {/* ... (your input fields) */}
       <div>
         <label>N:</label>

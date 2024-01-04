@@ -144,3 +144,74 @@ export const getUserLocation = catchAsyncError(async (req, res, next) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+export const soildetails = catchAsyncError(async (req, res, next) => {
+  try {
+    const user = req.user;
+    console.log(user);
+    const { N, P, K, temperature, humidity, phLevel, rainfall } = req.body;
+
+    // Create soilDetails object
+    const soilDetails = {
+      nLevel: N,
+      pLevel: P,
+      kLevel: K,
+      temperature,
+      humidity,
+      phLevel,
+      rainfall,
+    };
+
+    // Fetch user from the database
+    const existingUser = await User.findById(user._id);
+
+    // Check if SoilComposition is empty
+    if (
+      !existingUser.SoilComposition ||
+      existingUser.SoilComposition.length === 0
+    ) {
+      // If empty, create a new array with the new soil details
+      existingUser.SoilComposition = [soilDetails];
+    } else {
+      // If not empty, push the new soil details to the existing array
+      console.log("Soil Composition if alreaady filled ");
+    }
+    // Save the updated user with new soil details
+    await existingUser.save();
+
+    res.status(200).json({ message: "Soil details saved successfully" });
+  } catch (error) {
+    console.error("Error saving soil details:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+export const getsoildetails = catchAsyncError(async (req, res, next) => {
+  try {
+    const user = req.user;
+    console.log(user);
+
+    if (!user) {
+      return next(new ErrorHandler("User not found", 404));
+    }
+    const soilDetails = user.SoilComposition || []; // Assuming SoilComposition is an array
+
+    res.status(200).json({ soilComposition: soilDetails });
+  } catch (error) {
+    console.error("Error fetching soil details : ", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+export const logout = catchAsyncError(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("token", null, {
+      // options from the sendtoken must be same as here for deployment
+      expires: new Date(),
+      httpOnly: true,
+    })
+    .json({
+      success: true,
+      message: "Logged out Succesfully",
+    });
+});

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import ML from './ML_Prediction/ML';
+import React, { useState, useEffect } from "react";
+import ML from "./ML_Prediction/ML";
 // array(['rice', 'maize', 'chickpea', 'kidneybeans', 'pigeonpeas',
 //        'mothbeans', 'mungbean', 'blackgram', 'lentil', 'pomegranate',
 //        'banana', 'mango', 'grapes', 'watermelon', 'muskmelon', 'apple',
@@ -7,10 +7,9 @@ import ML from './ML_Prediction/ML';
 //       dtype=object)
 
 function DashboardCard04() {
-
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200 ">
-      <ML/> 
+      <ML />
     </div>
   );
 }
