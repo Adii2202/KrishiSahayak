@@ -16,7 +16,7 @@ function Dashboard() {
       {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <Header />
 
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
@@ -42,11 +42,11 @@ function Dashboard() {
 
 
 
-            <div className=" pt-12 animate-fade-down animate-once animate-duration-[3000ms] animate-delay-[400ms] animate-ease-linear border-none ">
+            <div className=" pt-12 animate-fade-down animate-once animate-duration-[3000ms] animate-delay-[400ms] animate-ease-linear border-none " id="weather">
               <DashboardCard13  />
             </div>
             
-            <div className=" pt-12  animate-fade-down animate-once animate-duration-[3000ms] animate-delay-[1500ms] animate-ease-linear">
+            <div className=" pt-12  animate-fade-down animate-once animate-duration-[3000ms] animate-delay-[1500ms] animate-ease-linear" id="calendar">
               <DashboardCard11 />
             </div>
 
