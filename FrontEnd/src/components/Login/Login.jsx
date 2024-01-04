@@ -22,6 +22,7 @@ function Login() {
       document.cookie = `token=${response.data.token}; path=/; max-age=${
         15 * 24 * 60 * 60 * 1000
       }`;
+      
       navigate("/dashboard");
     } catch (error) {
       console.error("Error logging user:", error.response.data);

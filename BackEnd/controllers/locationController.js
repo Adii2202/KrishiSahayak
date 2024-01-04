@@ -105,13 +105,13 @@ export const login = catchAsyncError(async (req, res, next) => {
 
   if (!isMatch)
     return next(new ErrorHandler("Incorrect Email or Password", 401));
-
+  console.log("jwt code :" + process.env.JWT_SECRET);
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
     expiresIn: "15d",
   });
   console.log(token);
   // Save the token as a cookie
-  res.cookie("adiiii", token, {
+  res.cookie("token", token, {
     expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
     httpOnly: true, // Set to true in production with HTTPS
   });
@@ -120,18 +120,8 @@ export const login = catchAsyncError(async (req, res, next) => {
 
 export const getUserLocation = catchAsyncError(async (req, res, next) => {
   try {
-    if (!req.user) {
-      return next(new ErrorHandler("User not authenticated", 401));
-    }
-
-    // Check if req.user has the expected structure
-    if (!req.user._id) {
-      return next(new ErrorHandler("Invalid user object", 500));
-    }
-
-    // Fetch user from the database using the user ID
-    const user = await User.findById(req.user._id);
-
+    const user = req.user;
+    console.log("user : " + user);
     // Check if user is not found
     if (!user) {
       return next(new ErrorHandler("User not found", 404));
@@ -147,7 +137,7 @@ export const getUserLocation = catchAsyncError(async (req, res, next) => {
       latitude: user.location[0].latitude,
       longitude: user.location[0].longitude,
     };
-
+    console.log(userLocation);
     res.status(200).json({ location: userLocation });
   } catch (error) {
     console.error("Error fetching user location:", error);

@@ -19,9 +19,13 @@ function MyComponent() {
     const getUserLocation = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/getuserlocation"
+          "http://localhost:5000/api/getuserlocation",
+          {
+            withCredentials: true,
+          }
         );
-        const { latitude, longitude } = response.data;
+
+        const { latitude, longitude } = response.data.location;
         console.log(latitude + " " + longitude);
         // Set the user's location in the state
         setUserLocation({ lat: latitude, lng: longitude });

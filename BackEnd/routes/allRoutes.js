@@ -12,6 +12,6 @@ const router = express.Router();
 router.route("/location").post(location);
 router.route("/register").post(register);
 router.route("/login").post(login);
-router.route("/getuserlocation").get(getUserLocation);
+router.route("/getuserlocation").get(isAuthenticated, getUserLocation);
 
 export default router;
