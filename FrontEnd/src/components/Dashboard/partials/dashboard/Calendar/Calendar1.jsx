@@ -71,58 +71,68 @@ function Calendar1() {
 
   return (
     <div className='app'>
-      <h1>Event Calendar</h1>
-      <div className="form-container">
-        <div className="form-section">
-          <label htmlFor="eventType">Event Type:</label>
-          <select
-            id="eventType"
-            value={newEvent.type}
-            onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value, title: "" })}
-          >
-            {eventTypes.map((eventType) => (
-              <option key={eventType} value={eventType}>
-                {eventType}
-              </option>
-            ))}
-          </select>
-        </div>
+      <h1 className="mb-4 mt-8 text-3xl font-bold">Event Calendar</h1>
+      <div className="form-container" style={{ marginBottom: '20px' }}>
+      <div className="form-section flex flex-col items-center">
+  <label htmlFor="eventType" className="block text-sm font-medium mb-2">Event Type:</label>
+  <select
+    id="eventType"
+    value={newEvent.type}
+    onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value, title: "" })}
+    className="mt-1 block w-1/2 py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
+  >
+    {eventTypes.map((eventType) => (
+      <option key={eventType} value={eventType}>
+        {eventType}
+      </option>
+    ))}
+  </select>
+</div>
 
+
+  
         {newEvent.type === "Other" && (
           <div className="form-section">
-            <label htmlFor="customTitle">Custom Title:</label>
+            <label htmlFor="customTitle" className="block text-sm font-medium">Custom Title:</label>
             <input
               id="customTitle"
               type='text'
               placeholder='Add Title'
               value={newEvent.title}
               onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+              className="py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm w-1/2 mx-auto"
+
             />
           </div>
         )}
-
-        <div className="form-section">
-          <label htmlFor="startDate">Start Date:</label>
+  
+        <div className="form-section" style={{ marginTop: '10px' }}>
+          <label htmlFor="startDate" className="block text-sm font-medium">Start Date:</label>
           <DatePicker
             id="startDate"
             placeholderText='Select Start Date'
             selected={newEvent.start}
             onChange={(start) => setNewEvent({ ...newEvent, start })}
+            className="mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-
-        <div className="form-section">
-          <label htmlFor="endDate">End Date:</label>
+  
+        <div className="form-section" style={{ marginTop: '10px' }}>
+          <label htmlFor="endDate" className="block text-sm font-medium">End Date:</label>
           <DatePicker
             id="endDate"
             placeholderText='Select End Date'
             selected={newEvent.end}
             onChange={(end) => setNewEvent({ ...newEvent, end })}
+            className="mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-
-        <button className=" bg-black rounded-md w-32 " onClick={handleAddEvent}>Add Event</button>
+  
+        <button className="bg-black text-white rounded-md w-32 mt-4 py-2 px-4" onClick={handleAddEvent}>
+          Add Event
+        </button>
       </div>
+
 
       <div className="event-list">
         <h2>Event List</h2>
@@ -140,7 +150,7 @@ function Calendar1() {
         events={allEvents}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500, margin: '50px' }}
+        style={{ height: 500, margin: '30px', background: '#ef4444' }}
       />
     </div>
   );
