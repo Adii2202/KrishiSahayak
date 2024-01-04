@@ -18,7 +18,9 @@ function MyComponent() {
   useEffect(() => {
     const getUserLocation = async () => {
       try {
-        const response = await axios.get("/api/getuserlocation");
+        const response = await axios.get(
+          "http://localhost:5000/api/getuserlocation"
+        );
         const { latitude, longitude } = response.data;
         console.log(latitude + " " + longitude);
         // Set the user's location in the state

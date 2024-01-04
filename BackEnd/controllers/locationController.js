@@ -3,6 +3,7 @@ import opencage from "opencage-api-client";
 import { User } from "../models/User.js";
 import ErrorHandler from "../middlewares/errorHandler.js";
 import { sendToken } from "../middlewares/sendToken.js";
+import jwt from "jsonwebtoken";
 
 export const location = catchAsyncError(async (req, res, next) => {
   try {
@@ -93,9 +94,6 @@ export const register = catchAsyncError(async (req, res, next) => {
 
 export const login = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
-
-  // const file = req.file;
-
   if (!email || !password)
     return next(new ErrorHandler("Please enter all fields", 400));
 
@@ -103,25 +101,48 @@ export const login = catchAsyncError(async (req, res, next) => {
 
   if (!user) return next(new ErrorHandler("Incorrect Email or Password", 401));
 
-  // upload file on cloudinary
-
   const isMatch = await user.comparePassword(password);
 
   if (!isMatch)
     return next(new ErrorHandler("Incorrect Email or Password", 401));
 
-  // send token function here as bohot saare tokens banane hai
-  sendToken(res, user, `Welcome back ${user.name}`, 200);
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "15d",
+  });
+  console.log(token);
+  // Save the token as a cookie
+  res.cookie("adiiii", token, {
+    expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+    httpOnly: true, // Set to true in production with HTTPS
+  });
+  res.json({ message: "Login successful", token });
 });
 
 export const getUserLocation = catchAsyncError(async (req, res, next) => {
   try {
+    if (!req.user) {
+      return next(new ErrorHandler("User not authenticated", 401));
+    }
+
+    // Check if req.user has the expected structure
+    if (!req.user._id) {
+      return next(new ErrorHandler("Invalid user object", 500));
+    }
+
+    // Fetch user from the database using the user ID
     const user = await User.findById(req.user._id);
-    console.log(user);
+
+    // Check if user is not found
     if (!user) {
       return next(new ErrorHandler("User not found", 404));
     }
 
+    // Check if user.location is defined
+    if (!user.location || !user.location[0]) {
+      return next(new ErrorHandler("User location not found", 404));
+    }
+
+    // Extract latitude and longitude from user.location
     const userLocation = {
       latitude: user.location[0].latitude,
       longitude: user.location[0].longitude,
