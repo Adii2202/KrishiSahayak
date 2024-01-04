@@ -43,11 +43,10 @@ function ML() {
           <p>Loading...</p>
         ) : userSoilComposition.length === 0 ? (
           <>
-            <h1 className="text-3xl mb-5 text-black">
-              Please upload the soil composition and required details to
-              determine suitable crops for cultivation by clicking the button
-              below.
-            </h1>
+            <h1 className="text-3xl mb-5 text-white text-center">
+  Please upload the soil composition and required details to determine suitable crops for cultivation by clicking the button below.
+</h1>
+
             <Button
               className="bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium text-sm rounded-lg px-5 py-3 mt-5"
               onClick={() => setShowModal(true)}
