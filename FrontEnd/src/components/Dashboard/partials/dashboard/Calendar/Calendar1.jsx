@@ -79,7 +79,7 @@ function Calendar1() {
     id="eventType"
     value={newEvent.type}
     onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value, title: "" })}
-    className="mt-1 block w-1/2 py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
+    className="mt-1 block w-1/4 py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
   >
     {eventTypes.map((eventType) => (
       <option key={eventType} value={eventType}>
@@ -100,7 +100,7 @@ function Calendar1() {
               placeholder='Add Title'
               value={newEvent.title}
               onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-              className="py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm w-1/2 mx-auto"
+              className="py-2 px-3 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm w-1/4 mx-auto"
 
             />
           </div>
@@ -150,7 +150,7 @@ function Calendar1() {
         events={allEvents}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500, margin: '30px', background: '#ef4444' }}
+        style={{ height: 500, margin: '30px', background: '#f59e0b' }}
       />
     </div>
   );
