@@ -10,7 +10,7 @@ export const location = catchAsyncError(async (req, res, next) => {
     const { latitude, longitude } = req.body;
     // print(process.env.OPEN_CAGE_API_KEY);
     // Use OpenCage API to get location details
-    const apiKey = "af5ab23220644e0dad25a034916a05de";
+    const apiKey = process.env.OPENCAGE_API_KEY;
     const data = await opencage.geocode({
       q: `${latitude}, ${longitude}`,
       key: apiKey,
@@ -136,6 +136,8 @@ export const getUserLocation = catchAsyncError(async (req, res, next) => {
     const userLocation = {
       latitude: user.location[0].latitude,
       longitude: user.location[0].longitude,
+      city: user.location[0].city,
+      state: user.location[0].state,
     };
     console.log(userLocation);
     res.status(200).json({ location: userLocation });
