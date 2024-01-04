@@ -22,7 +22,7 @@ export const StateContextProvider = ({ children }) => {
         shortColumnNames: 0,
       },
       headers: {
-        "X-RapidAPI-Key": "54feee27e9mshf661545e6f3631fp1856a9jsn10abe1f9d4de",
+        "X-RapidAPI-Key": "92fc33f039mshb0206b8c02f67c8p186c27jsnbb5581423f26",
         "X-RapidAPI-Host": "visual-crossing-weather.p.rapidapi.com",
       },
     };

@@ -6,8 +6,8 @@ import { tailwindConfig } from '../../utils/Utils';
 function DashboardCard11() {
 
   return(
-    <div className="col-span-full xl:col-span-6 bg-green-500 shadow-lg  border border-slate-200 h-full text-center rounded-lg">
-      <Calendar1/>
+    <div className="col-span-full xl:col-span-6 bg-stone-800 opacity-100 shadow-lg border border-slate-200 h-full text-center rounded-lg">     
+        <Calendar1/>
     </div>
   )
 }
