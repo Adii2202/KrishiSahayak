@@ -176,7 +176,7 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
         </label>
         <input
           type="number"
-          name="Temperature"
+          name="temperature"
           onChange={handleChange}
           style={{
             width: "100%",
@@ -192,7 +192,7 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
         </label>
         <input
           type="number"
-          name="Humidity"
+          name="humidity"
           onChange={handleChange}
           style={{
             width: "100%",
@@ -208,7 +208,7 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
         </label>
         <input
           type="number"
-          name="pH"
+          name="ph"
           onChange={handleChange}
           style={{
             width: "100%",
@@ -224,7 +224,7 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
         </label>
         <input
           type="number"
-          name="Rainfall"
+          name="rainfall"
           onChange={handleChange}
           style={{
             width: "100%",
