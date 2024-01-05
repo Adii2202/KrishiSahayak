@@ -106,37 +106,149 @@ const CropPredictionForm = ({ onPredictionUpdate, onClose }) => {
   };
 
   return (
-    <div ref={formRef}>
+    <div
+      ref={formRef}
+      style={{
+        position: "fixed",
+        zIndex: 1000, // Adjust the z-index as needed
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "400px", // Adjust the width as needed
+        backgroundColor: "#f4f4f4",
+        padding: "20px",
+        borderRadius: "8px",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", // Add a subtle shadow
+      }}
+    >
       {/* ... (your input fields) */}
-      <div>
-        <label>N:</label>
-        <input type="number" name="N" onChange={handleChange} />
+      <div style={{ marginBottom: "15px" }}>
+        <label style={{ display: "block", marginBottom: "5px", color: "#333" }}>
+          N (Nitrogen Content):
+        </label>
+        <input
+          type="number"
+          name="N"
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        />
       </div>
-      <div>
-        <label>P:</label>
-        <input type="number" name="P" onChange={handleChange} />
+      <div style={{ marginBottom: "15px" }}>
+        <label style={{ display: "block", marginBottom: "5px", color: "#333" }}>
+          P (Phosphorous Content):
+        </label>
+        <input
+          type="number"
+          name="P"
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        />
       </div>
-      <div>
-        <label>K:</label>
-        <input type="number" name="K" onChange={handleChange} />
+      <div style={{ marginBottom: "15px" }}>
+        <label style={{ display: "block", marginBottom: "5px", color: "#333" }}>
+          K (Pottasium Content):
+        </label>
+        <input
+          type="number"
+          name="K"
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        />
       </div>
-      <div>
-        <label>Temperature:</label>
-        <input type="number" name="temperature" onChange={handleChange} />
+      <div style={{ marginBottom: "15px" }}>
+        <label style={{ display: "block", marginBottom: "5px", color: "#333" }}>
+          Temperature:
+        </label>
+        <input
+          type="number"
+          name="Temperature"
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        />
       </div>
-      <div>
-        <label>Humidity:</label>
-        <input type="number" name="humidity" onChange={handleChange} />
+      <div style={{ marginBottom: "15px" }}>
+        <label style={{ display: "block", marginBottom: "5px", color: "#333" }}>
+          Humidity:
+        </label>
+        <input
+          type="number"
+          name="Humidity"
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        />
       </div>
-      <div>
-        <label>pH:</label>
-        <input type="number" name="ph" onChange={handleChange} />
+      <div style={{ marginBottom: "15px" }}>
+        <label style={{ display: "block", marginBottom: "5px", color: "#333" }}>
+          pH:
+        </label>
+        <input
+          type="number"
+          name="pH"
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        />
       </div>
-      <div>
-        <label>Rainfall:</label>
-        <input type="number" name="rainfall" onChange={handleChange} />
+      <div style={{ marginBottom: "15px" }}>
+        <label style={{ display: "block", marginBottom: "5px", color: "#333" }}>
+          Rainfall:
+        </label>
+        <input
+          type="number"
+          name="Rainfall"
+          onChange={handleChange}
+          style={{
+            width: "100%",
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+          }}
+        />
       </div>
-      <button onClick={handlePredict}>Predict</button>
+      {/* ... (repeat for other input fields) */}
+      <button
+        onClick={handlePredict}
+        style={{
+          width: "100%", // Make the button full-width
+          backgroundColor: "#4caf50",
+          color: "#fff",
+          padding: "10px 20px",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        Predict
+      </button>
       {/* {prediction && <p>Prediction: {prediction}</p>}
       {image && <img src={image} alt="Predicted Crop" style={{ width: '300px', height: 'auto' }} />} */}
       {/* <button onClick={handlePredict}>Predict</button> */}
