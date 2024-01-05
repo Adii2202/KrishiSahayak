@@ -6,8 +6,31 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const [weather, setWeather] = useState({});
   const [values, setValues] = useState([]);
-  const [place, setPlace] = useState("Jaipur");
+  const [place, setPlace] = useState(null);
   const [thisLocation, setLocation] = useState("");
+
+  useEffect(() => {
+    const fetchUserLocation = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/getuserlocation",
+          {
+            withCredentials: true,
+          }
+        );
+        const userLocation = response.data.userInfo;
+
+        // Assuming city information is available in userInfo.city
+        const city = userLocation.city;
+        console.log("city : " + city);
+        setPlace(city); // Set the city for fetching weather information
+      } catch (error) {
+        console.error("Error fetching user Location:", error);
+      }
+    };
+
+    fetchUserLocation();
+  }, []);
 
   // fetch api
   const fetchWeather = async () => {
@@ -16,7 +39,7 @@ export const StateContextProvider = ({ children }) => {
       url: "https://visual-crossing-weather.p.rapidapi.com/forecast",
       params: {
         aggregateHours: "24",
-        location: place,
+        location: place ? place : "Aurangabad",
         contentType: "json",
         unitGroup: "metric",
         shortColumnNames: 0,

@@ -49,34 +49,54 @@ function MyComponent() {
 
   const calculateAndDisplayRoute = () => {
     if (directionsService && directionsRenderer) {
-      directionsService.route(
+      const waypoints = [
         {
-          origin: new window.google.maps.LatLng(19.14, 75.14),
-          destination: new window.google.maps.LatLng(19.75, 75.14),
-          travelMode: window.google.maps.TravelMode.DRIVING,
+          location: new window.google.maps.LatLng(19.75, 75.14),
+          stopover: true,
         },
-        (result, status) => {
-          if (status === window.google.maps.DirectionsStatus.OK) {
-            directionsRenderer.setDirections(result);
-            const distance = result.routes[0].legs[0].distance.text;
-            setShortestDistance(distance);
+        {
+          location: new window.google.maps.LatLng(20.75, 75.14),
+          stopover: true,
+        },
+        {
+          location: new window.google.maps.LatLng(21.75, 75.14),
+          stopover: true,
+        },
+      ];
 
-            // Fetch and set start location name
-            fetchLocationName(
-              result.routes[0].legs[0].start_location,
-              setStartLocationName
-            );
+      const request = {
+        origin: new window.google.maps.LatLng(19.14, 75.14),
+        waypoints,
+        destination: new window.google.maps.LatLng(20.75, 75.14),
+        travelMode: window.google.maps.TravelMode.DRIVING,
+      };
 
-            // Fetch and set end location name
-            fetchLocationName(
-              result.routes[0].legs[0].end_location,
-              setEndLocationName
-            );
-          } else {
-            console.error(`Error fetching directions: ${status}`);
-          }
+      directionsService.route(request, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          directionsRenderer.setDirections(result);
+
+          const distance = result.routes[0].legs.reduce(
+            (total, leg) => total + leg.distance.value,
+            0
+          );
+          setShortestDistance(distance);
+
+          // Fetch and set start location name
+          fetchLocationName(
+            result.routes[0].legs[0].start_location,
+            setStartLocationName
+          );
+
+          // Fetch and set end location name
+          fetchLocationName(
+            result.routes[0].legs[result.routes[0].legs.length - 1]
+              .end_location,
+            setEndLocationName
+          );
+        } else {
+          console.error(`Error fetching directions: ${status}`);
         }
-      );
+      });
     }
   };
 
@@ -117,7 +137,7 @@ function MyComponent() {
         <div>
           <p>Start Location: {startLocationName}</p>
           <p>End Location: {endLocationName}</p>
-          <p>Shortest Distance: {shortestDistance}</p>
+          <p>Shortest Distance: {shortestDistance} meters</p>
         </div>
       )}
     </div>

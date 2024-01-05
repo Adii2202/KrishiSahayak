@@ -121,7 +121,7 @@ export const login = catchAsyncError(async (req, res, next) => {
 export const getUserLocation = catchAsyncError(async (req, res, next) => {
   try {
     const user = req.user;
-    console.log("user : " + user);
+    // console.log("user : " + user);
     // Check if user is not found
     if (!user) {
       return next(new ErrorHandler("User not found", 404));
@@ -146,6 +146,29 @@ export const getUserLocation = catchAsyncError(async (req, res, next) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+export const getUserInformation = catchAsyncError(async (req, res, next) => {
+  try {
+    const user = req.user;
+    console.log("user : " + user);
+    // Check if user is not found
+    if (!user) {
+      return next(new ErrorHandler("User not found", 404));
+    }
+
+    // Extract latitude and longitude from user.location
+    const userInfo = {
+      name: user.name,
+      email: user.email,
+    };
+    console.log(userInfo);
+    res.status(200).json({ userInfo: userInfo });
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 export const soildetails = catchAsyncError(async (req, res, next) => {
   try {
     const user = req.user;

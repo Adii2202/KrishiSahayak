@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getUserInformation,
   getUserLocation,
   getsoildetails,
   location,
@@ -18,6 +19,7 @@ router.route("/login").post(login);
 router.route("/getuserlocation").get(isAuthenticated, getUserLocation);
 router.route("/soildetails").post(isAuthenticated, soildetails);
 router.route("/getsoildetails").get(isAuthenticated, getsoildetails);
+router.route("/getuserinfo").get(isAuthenticated, getUserInformation);
 router.route("/logout").get(logout);
 
 export default router;
